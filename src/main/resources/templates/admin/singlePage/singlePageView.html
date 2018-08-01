@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="admin/layouts/header :: header(title='单页预览')">
+</head>
+<body style="padding: 30px;">
+	<div id="container">
+		<div class="form-horizontal">
+			<div class="box-body">
+				<div class="col-sm-12 col-center-block" >
+                    <p th:utext="${singlePageView.detail}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

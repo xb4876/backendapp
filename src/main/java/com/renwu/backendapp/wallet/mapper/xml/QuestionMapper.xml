@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.renwu.backendapp.wallet.mapper.QuestionMapper" >
+    <resultMap id="BaseResultMap" type="com.renwu.backendapp.wallet.entity.Question" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="create_date" property="create_date" jdbcType="DATE" />
+        <result column="update_date" property="update_date" jdbcType="DATE" />
+        <result column="type" property="type" jdbcType="SMALLINT" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+        <result column="orderby" property="orderby" jdbcType="INTEGER" />
+        <result column="viewnum" property="viewnum" jdbcType="INTEGER" />
+    </resultMap>
+
+    <select id="findOne" resultMap="BaseResultMap" >
+        select id,type,title,detail,orderby,viewnum
+        from sys_help
+        where id = #{id}
+    </select>
+
+    <select id="findList" resultMap="BaseResultMap">
+        select id,type,title,detail,orderby,viewnum
+        from sys_help
+        WHERE 1=1
+        <if test="entity.type != null and entity.type != 0">
+            AND type = #{entity.type}
+        </if>
+        <if test="entity.title != null and entity.title != ''">
+            AND title LIKE concat('%',#{entity.title},'%')
+        </if>
+    </select>
+
+    <insert id="save">
+		INSERT INTO sys_help(
+			id,
+			type,
+			title,
+			update_date,
+			create_date,
+            detail,
+            orderby,
+            viewnum
+		) VALUES (
+			#{id},
+			#{type},
+			#{title},
+			#{update_date},
+			#{create_date},
+			#{detail},
+			#{orderby},
+			#{viewnum}
+		)
+	</insert>
+
+    <!-- 更新问题 -->
+    <update id="update">
+		UPDATE sys_help SET
+			type = #{type},
+			title = #{title},
+			update_date = #{update_date},
+			detail = #{detail},
+			orderby = #{orderby},
+			viewnum = #{viewnum}
+		WHERE id = #{id}
+	</update>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+		DELETE FROM sys_help WHERE id = #{id}
+	</delete>
+
+</mapper>

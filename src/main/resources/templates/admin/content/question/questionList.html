@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>header</title>
+</head>
+
+<body>
+	<div id="content" th:fragment="content">
+		<div class="container">
+			<!-- Breadcrumbs line -->
+			<div class="crumbs">
+				<ul id="breadcrumbs" class="breadcrumb">
+					<li><i class="icon-home"></i> <a href="/">仪表盘</a></li>
+					<li class="current">帮助中心</li>
+				</ul>
+
+			</div>
+			<!-- /Breadcrumbs line -->
+
+			<!--=== Page Header ===-->
+			<div class="page-header">
+				<div class="page-title">
+					<span th:inline="text">欢迎使用，[[${#httpServletRequest.remoteUser}]]!</span>
+				</div>
+
+			</div>
+			<!-- /Page Header -->
+
+			<!--=== Page Content ===-->
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="widget box">
+						<div class="widget-header">
+							<h4>
+								<i class="icon-reorder"></i> 问题列表
+							</h4>
+							<div class="toolbar no-padding">
+								<div class="btn-group">
+									<span class="btn btn-xs "><a
+										th:href="@{/question/add}"><i class="icon-plus"></i></a></span>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+
+							<!-- 搜索 -->
+							<div class="accordion-group">
+								<div id="collapseTwo" class="accordion-body collapse">
+									<div class="accordion-inner">
+										<form id="searchForm" class="form form-horizontal well clearfix" >
+											<div class="col-xs-12 col-sm-6 col-md-4">
+												<label class="label-item single-overflow pull-left" title="分类：">分类：</label>
+												<select id="type" name="type" class="select2" style="width: 100%">
+													<option value="0" selected="selected">请选择类型</option>
+													<option value="1">新手指南</option>
+													<option value="2">钱包安全</option>
+													<option value="3">基础教程</option>
+													<option value="4">转账/收款</option>
+													<option value="5">区块链知识</option>
+												</select>
+											</div>
+											<div class="col-xs-12 col-sm-6 col-md-4">
+												<label class="label-item single-overflow pull-left" title="标题：">标题：</label>
+												<input id="title" name="title" type="text" maxlength="50" class="form-control"/>
+											</div>
+											<div class="col-xs-12 col-sm-6 col-md-4">
+												<div style="margin-top:26px">
+													<a  id="search" class="btn btn-primary btn-rounded  btn-bordered btn-sm"><i class="icon-search"></i> 查询</a>
+													<a  id="reset" class="btn btn-primary btn-rounded  btn-bordered btn-sm" ><i class="icon-refresh"></i> 重置</a>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<!-- 工具栏 -->
+							<div id="toolbar">
+									<button id="edit" class="btn btn-success" disabled onclick="edit()">
+										<i class="glyphicon glyphicon-edit"></i> 修改
+									</button>
+									<button id="remove" class="btn btn-danger" disabled onclick="deleteAll()">
+										<i class="glyphicon glyphicon-remove"></i> 删除
+									</button>
+
+								<a class="accordion-toggle btn btn-default" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+									<i class="icon-search"></i> 检索
+								</a>
+							</div>
+							<!-- 表格 -->
+							<table id="table"
+								   data-toolbar="#toolbar"
+								   data-show-refresh="true"
+								   data-show-toggle="true"
+								   data-show-columns="true"
+								   data-show-export="true"
+								   data-show-pagination-switch="true"
+								   data-detail-formatter="detailFormatter"
+								   data-minimum-count-columns="2"
+								   data-id-field="id">
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+                var $table;
+                $table =  $('#table').bootstrapTable({
+
+                    //请求方法
+                    method: 'get',
+                    dataType: "json",
+                    //是否显示行间隔色
+                    striped: true,
+                    //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    cache: false,
+                    //是否显示分页（*）
+                    pagination: true,
+                    //排序方式
+                    sortOrder: "asc",
+                    //初始化加载第一页，默认第一页
+                    //我设置了这一项，但是貌似没起作用，而且我这默认是0,- -
+                    pageNumber:1,
+                    //每页的记录行数（*）
+                    pageSize: 10,
+                    //可供选择的每页的行数（*）
+                    pageList: [10, 25, 50, 100],
+                    //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
+                    url:"/question/getQuestionList",
+                    //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
+                    //queryParamsType:'',
+                    ////查询参数,每次调用是会带上这个参数，可自定义
+                    queryParams : function(params) {
+                        var searchParam = $("#searchForm").serializeJSON();
+                        searchParam.limit = this.limit;
+                        searchParam.offset = this.offset;
+                        searchParam.pageNum = this.pageNumber;
+                        searchParam.pageSize = this.pageSize;
+                        searchParam.orderBy = params.sort === undefined? "" : params.sort+ " "+  params.order;
+                        return searchParam;
+                    },
+                    //分页方式：client客户端分页，server服务端分页（*）
+                    sidePagination: "server",
+                    contextMenuTrigger:"right",//pc端 按右键弹出菜单
+                    contextMenuTriggerMobile:"press",//手机端 弹出菜单，click：单击， press：长按。
+                    contextMenu: '#context-menu',
+                    columns: [{
+                        checkbox: true
+
+                    }, {
+                        field: 'id',
+                        title: '问题ID',
+                        sortable: true,
+                    }, {
+                        field: 'title',
+                        title: '问题标题',
+                        sortable: true
+                    }, {
+                        field: 'type',
+                        title: '问题类型',
+                        sortable: true,
+                        formatter:function(value, row, index){
+                            if(row.type==1){
+                                return '新手指南';
+                            }else if(row.type==2){
+                                return '钱包安全';
+                            }else if(row.type==3){
+                                return '基础教程';
+                            }else if(row.type==4){
+                                return '转账/收款';
+                            }else if(row.type==5){
+                                return '区块链知识';
+                            }
+                        }
+                    }]
+
+                });
+
+
+                if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){//如果是移动端，默认关闭tab
+
+
+                    $('#table').bootstrapTable("toggleView");
+                }
+
+                $('#table').on('check.bs.table uncheck.bs.table load-success.bs.table ' +
+                    'check-all.bs.table uncheck-all.bs.table', function () {
+                    $('#remove').prop('disabled', ! $('#table').bootstrapTable('getSelections').length);
+                    $('#edit').prop('disabled', $('#table').bootstrapTable('getSelections').length!=1);
+                });
+
+                $("#search").click("click", function() {// 绑定查询按扭
+                    $('#table').bootstrapTable('refresh');
+                });
+                $("#reset").click("click", function() {// 绑定重置按扭
+                    $("#searchForm  input").val("");
+                    $("#searchForm  select").val("");
+                    $('#table').bootstrapTable('refresh');
+                });
+				// 删除
+                function deleteAll(ids){
+                    if(!ids){
+                        ids = getIdSelections();
+                    }
+                    if(ids == ""){
+                        top.layer.alert('请至少选择一条数据!', {icon: 0, title:'警告'});
+                        return;
+                    }
+                    top.layer.confirm('确认要彻底删除数据吗?', {icon: 3, title:'系统提示'}, function(index){
+                        $.get("/question/deleteAll?ids=" + ids, function(data){
+                            if(data.code==0){
+                                $('#table').bootstrapTable('refresh');
+                                top.layer.msg(data.message, {icon:1});
+                            }else{
+                                top.layer.msg(data.message, {icon:2});
+                            }
+                        })
+                        //window.location = "/question/questionList?ids="+ids;
+                        //top.layer.close(index);
+                    });
+
+                }
+                // 修改
+                function edit(){
+                    window.location = "/question/edit?id=" + getIdSelections();
+                }
+                //获取选中的id
+                function getIdSelections() {
+                    return $.map($("#table").bootstrapTable('getSelections'), function (row) {
+                        return row.id
+                    });
+                }
+			</script>
+			<!-- /.row -->
+			<!-- /Page Content -->
+		</div>
+		<!-- /.container -->
+
+	</div>
+
+</body>
+</html>

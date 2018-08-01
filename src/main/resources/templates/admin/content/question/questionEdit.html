@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>header</title>
+</head>
+
+<body>
+<div id="content" th:fragment="content">
+    <div class="container">
+        <!-- Breadcrumbs line -->
+        <div class="crumbs">
+            <ul id="breadcrumbs" class="breadcrumb">
+                <li><i class="icon-home"></i> <a href="/">仪表盘</a></li>
+                <li class="current">编辑问题</li>
+            </ul>
+
+        </div>
+        <!-- /Breadcrumbs line -->
+
+        <!--=== Page Header ===-->
+        <div class="page-header">
+            <div class="page-title">
+                <span th:inline="text">欢迎使用，[[${#httpServletRequest.remoteUser}]]!</span>
+            </div>
+
+        </div>
+        <!-- /Page Header -->
+
+        <!--=== Page Content ===-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget box">
+                    <div class="widget-header">
+                        <h4>
+                            <i class="icon-reorder"></i> 编辑问题
+                        </h4>
+                        <div class="toolbar no-padding">
+                            <div class="btn-group">
+									<span class="btn btn-xs collapse"><i
+                                            class="icon-angle-down"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content no-padding">
+                        <div class="panel-body">
+                            <div class="row">
+
+                                <div class="col-sm-12 animated fadeInRight">
+                                    <div class="mail-box">
+
+
+                                        <div class="mail-body">
+                                            <form action="#" id="inputForm" th:action="@{/question/edit}"
+                                                  th:object="${questionEdit}" method="post" onreset="clear()"
+                                                  class="form-horizontal">
+                                                <input type="hidden" name="id" th:field="*{id}">
+                                                <div class="form-group require_from_group">
+                                                    <label class="col-sm-2 control-label">标题：</label>
+
+                                                    <div class="col-sm-8">
+                                                        <input type="text" id="title" name="title" th:field="*{title}"
+                                                               class="form-control" autofocus="autofocus"
+                                                               data-rule-required="true" data-msg-required="请输入标题">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group require_from_group">
+                                                    <label class="col-sm-2 control-label">类型：</label>
+
+                                                    <div class="col-sm-8">
+                                                        <select id="type" name="type" th:field="*{type}" th:switch="*{type}" class="select2" style="width:100%;">
+                                                            <option th:case="1" th:selected="selected" value="1">新手指南</option>
+                                                            <option th:case="2" th:selected="selected" value="2">钱包安全</option>
+                                                            <option th:case="3" th:selected="selected" value="3">基础教程</option>
+                                                            <option th:case="4" th:selected="selected" value="4">转账/收款</option>
+                                                            <option th:case="5" th:selected="selected" value="5">区块链知识</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">排序：</label>
+
+                                                    <div class="col-sm-8">
+                                                        <input type="text" id="orderby" name="orderby"
+                                                               th:field="*{orderby}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style="display: none;">
+                                                    <label class="col-sm-2 control-label">阅读次数：</label>
+
+                                                    <div class="col-sm-8">
+                                                        <input type="text" id="viewnum" name="viewnum"
+                                                               th:field="*{viewnum}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">内容：</label>
+                                                    <div class="col-sm-8">
+                                                        <script id="myEditor" name="detail" type="text/plain" style="width:100%;height:240px;">
+                                                            <p th:utext="*{detail}"></p>
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-body text-right tooltip-demo">
+                                                    <input type="submit" class="btn btn-primary  btn-sm" value="提交"/>
+                                                    <input type="reset" id="reset" class="btn btn-primary  btn-sm"
+                                                           value="重置"/>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- /Page Content -->
+
+    </div>
+    <!-- /.container -->
+    <script type="text/javascript">
+        //实例化编辑器
+        var um = UM.getEditor('myEditor');
+        //对编辑器的操作最好在编辑器ready之后再做
+        um.ready(function () {
+            //设置编辑器的内容
+            um.setContent();
+        });
+
+        um.addListener('blur', function () {
+            // 编辑器失去焦点了
+        });
+        um.addListener('focus', function () {
+            $('#focush2').html('')
+        });
+        // 清除表单内容
+        $("#reset").click(function () {
+            um.setContent('');
+        });
+    </script>
+    <script type="text/javascript">
+
+        $("#inputForm").validate({
+            submitHandler: function (form) {
+                form.submit();
+            },
+            errorContainer: "#messageBox",
+            errorPlacement: function (error, element) {
+                $("#messageBox").text("输入有误，请先更正。");
+                if (element.is(":checkbox") || element.is(":radio") || element.parent().is(".input-append")) {
+                    error.appendTo(element.parent().parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    </script>
+
+</div>
+</body>
+</html>

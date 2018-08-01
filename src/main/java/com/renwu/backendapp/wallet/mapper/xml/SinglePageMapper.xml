@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.renwu.backendapp.wallet.mapper.SinglePageMapper" >
+    <resultMap id="BaseResultMap" type="com.renwu.backendapp.wallet.entity.SinglePage" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="create_date" property="create_date" jdbcType="DATE" />
+        <result column="update_date" property="update_date" jdbcType="DATE" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+        <result column="module_name" property="module_name" jdbcType="VARCHAR" />
+        <result column="module" property="module" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="findOne" resultMap="BaseResultMap" >
+        select id,title,detail,module,module_name
+        from sys_single
+        where id = #{id}
+    </select>
+
+    <select id="findList" resultMap="BaseResultMap">
+        select id,title,detail,module,module_name
+        from sys_single
+        WHERE 1=1
+        <if test="entity.module != null and entity.module != ''">
+            AND module = #{entity.module}
+        </if>
+    </select>
+
+    <insert id="save">
+		INSERT INTO sys_single(
+			id,
+			title,
+			update_date,
+			create_date,
+            detail,
+            module,
+            module_name
+		) VALUES (
+			#{id},
+			#{title},
+			#{update_date},
+			#{create_date},
+			#{detail},
+			#{module},
+			#{module_name}
+		)
+	</insert>
+
+    <!-- 更新问题 -->
+    <update id="update">
+		UPDATE sys_single SET
+			title = #{title},
+			update_date = #{update_date},
+			detail = #{detail},
+			module = #{module},
+			module_name = #{module_name}
+		WHERE id = #{id}
+	</update>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+		DELETE FROM sys_single WHERE id = #{id}
+	</delete>
+
+</mapper>
