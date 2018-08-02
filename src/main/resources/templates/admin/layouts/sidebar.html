@@ -31,13 +31,19 @@
 						class="icon-user"></i> 用户管理
 				</a></li>
 				<li th:class="${questions} ? 'current' : ''"><a href="/question/questionList"> <i
-						class="icon-question"></i> 帮助中心
+						class="icon-question-sign"></i> 帮助中心
 				</a></li>
 				<li th:class="${singlePage} ? 'current' : ''"><a href="/singlePage/singlePageList"> <i
-						class="icon-list"></i> 单页管理
+						class="icon-file-alt"></i> 单页管理
+				</a></li>
+				<li th:class="${version} ? 'current' : ''"><a href="/version/versionList"> <i
+						class="icon-tags"></i> 版本管理
+				</a></li>
+				<li th:class="${problem} ? 'current' : ''"><a href="/problem/problemList"> <i
+						class="icon-mail-reply-all"></i> 问题反馈
 				</a></li>
 				<li th:class="${uedit} ? 'current' : ''"><a href="/admin/uedit"> <i
-						class="icon-list"></i> 富文本管理
+						class="icon-text-height"></i> 富文本管理
 				</a></li>
 				<div class="sidebar-title">
 					<span>API管理</span>
