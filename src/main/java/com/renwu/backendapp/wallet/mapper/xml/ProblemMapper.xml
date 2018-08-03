@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.renwu.backendapp.wallet.mapper.ProblemMapper" >
+    <resultMap id="BaseResultMap" type="com.renwu.backendapp.wallet.entity.Problem" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="create_date" property="create_date" jdbcType="DATE" />
+        <result column="update_date" property="update_date" jdbcType="DATE" />
+        <result column="problem_type" property="problem_type" jdbcType="INTEGER" />
+        <result column="problem_content" property="problem_content" jdbcType="VARCHAR" />
+        <result column="problem_contact" property="problem_contact" jdbcType="VARCHAR" />
+        <result column="feedback_state" property="feedback_state" jdbcType="INTEGER" />
+        <result column="feedback_result" property="feedback_result" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="problemColumns">
+        id,
+        problem_type,
+        problem_content,
+        problem_contact,
+        feedback_state,
+        feedback_result,
+        create_date
+	</sql>
+
+    <select id="findOne" resultMap="BaseResultMap" >
+        select
+          <include refid="problemColumns"/>
+        from sys_problem
+        where id = #{id}
+    </select>
+
+    <select id="findList" resultMap="BaseResultMap">
+        select
+          <include refid="problemColumns"/>
+        from sys_problem
+        WHERE 1=1
+        <if test="entity.problem_type != null and entity.problem_type != 0">
+            AND problem_type = #{entity.problem_type}
+        </if>
+        <if test="entity.problem_content != null and entity.problem_content != ''">
+            AND problem_content LIKE concat('%',#{entity.problem_content},'%')
+        </if>
+    </select>
+
+    <!-- 更新数据 -->
+    <update id="update">
+		UPDATE sys_problem SET
+			update_date = #{update_date},
+			problem_type = #{problem_type},
+            problem_content = #{problem_content},
+            problem_contact = #{problem_contact},
+            feedback_state = #{feedback_state},
+            feedback_result = #{feedback_result}
+		WHERE id = #{id}
+	</update>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+		DELETE FROM sys_problem WHERE id = #{id}
+	</delete>
+
+</mapper>
