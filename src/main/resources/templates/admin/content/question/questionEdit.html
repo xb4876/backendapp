@@ -70,12 +70,12 @@
                                                     <label class="col-sm-2 control-label">类型：</label>
 
                                                     <div class="col-sm-8">
-                                                        <select id="type" name="type" th:field="*{type}" th:switch="*{type}" class="select2" style="width:100%;">
-                                                            <option th:case="1" th:selected="selected" value="1">新手指南</option>
-                                                            <option th:case="2" th:selected="selected" value="2">钱包安全</option>
-                                                            <option th:case="3" th:selected="selected" value="3">基础教程</option>
-                                                            <option th:case="4" th:selected="selected" value="4">转账/收款</option>
-                                                            <option th:case="5" th:selected="selected" value="5">区块链知识</option>
+                                                        <select name="type"  th:field="*{type}" class="select2" style="width:100%">
+                                                            <option value="1" th:selected="${problem_type=='1'}">新手指南</option>
+                                                            <option value="2" th:selected="${problem_type=='2'}">钱包安全</option>
+                                                            <option value="3" th:selected="${problem_type=='3'}">基础教程</option>
+                                                            <option value="4" th:selected="${problem_type=='4'}">转账/收款</option>
+                                                            <option value="5" th:selected="${problem_type=='5'}">区块链知识</option>
                                                         </select>
                                                     </div>
                                                 </div>
