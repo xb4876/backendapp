@@ -13,7 +13,7 @@
 			<div class="crumbs">
 				<ul id="breadcrumbs" class="breadcrumb">
 					<li><i class="icon-home"></i> <a href="/">仪表盘</a></li>
-					<li class="current">帮助中心</li>
+					<li class="current">版本管理</li>
 				</ul>
 
 			</div>
@@ -35,12 +35,12 @@
 					<div class="widget box">
 						<div class="widget-header">
 							<h4>
-								<i class="icon-reorder"></i> 问题列表
+								<i class="icon-reorder"></i> 版本列表
 							</h4>
 							<div class="toolbar no-padding">
 								<div class="btn-group">
 									<span class="btn btn-xs "><a
-										th:href="@{/question/add}"><i class="icon-plus"></i></a></span>
+										th:href="@{/appVersion/add}"><i class="icon-plus"></i></a></span>
 								</div>
 							</div>
 						</div>
@@ -52,19 +52,12 @@
 									<div class="accordion-inner">
 										<form id="searchForm" class="form form-horizontal well clearfix" >
 											<div class="col-xs-12 col-sm-6 col-md-4">
-												<label class="label-item single-overflow pull-left" title="分类：">分类：</label>
-												<select id="type" name="type" class="select2" style="width: 100%">
-													<option value="0" selected="selected">请选择类型</option>
-													<option value="1">新手指南</option>
-													<option value="2">钱包安全</option>
-													<option value="3">基础教程</option>
-													<option value="4">转账/收款</option>
-													<option value="5">区块链知识</option>
-												</select>
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-4">
 												<label class="label-item single-overflow pull-left" title="标题：">标题：</label>
 												<input id="title" name="title" type="text" maxlength="50" class="form-control"/>
+											</div>
+											<div class="col-xs-12 col-sm-6 col-md-4">
+												<label class="label-item single-overflow pull-left" title="更新说明：">更新说明：</label>
+												<input id="note" name="note" type="text" maxlength="50" class="form-control"/>
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-4">
 												<div style="margin-top:26px">
@@ -130,7 +123,7 @@
                     //可供选择的每页的行数（*）
                     pageList: [10, 25, 50, 100],
                     //这个接口需要处理bootstrap table传递的固定参数,并返回特定格式的json数据
-                    url:"/question/getQuestionList",
+                    url:"/appVersion/getVersionList",
                     //默认值为 'limit',传给服务端的参数为：limit, offset, search, sort, order Else
                     //queryParamsType:'',
                     ////查询参数,每次调用是会带上这个参数，可自定义
@@ -153,28 +146,35 @@
 
                     }, {
                         field: 'id',
-                        title: '问题ID',
+                        title: '版本ID',
                         sortable: true,
                     }, {
                         field: 'title',
-                        title: '问题标题',
+                        title: '版本标题',
                         sortable: true
                     }, {
-                        field: 'type',
-                        title: '问题类型',
+                        field: 'version',
+                        title: '版本号',
+                        sortable: true
+                    },{
+                        field: 'is_new',
+                        title: '最新版本',
                         sortable: true,
                         formatter:function(value, row, index){
-                            if(row.type==1){
-                                return '新手指南';
-                            }else if(row.type==2){
-                                return '钱包安全';
-                            }else if(row.type==3){
-                                return '基础教程';
-                            }else if(row.type==4){
-                                return '转账/收款';
-                            }else if(row.type==5){
-                                return '区块链知识';
-                            }
+                            if(value == 1){
+                                return '是';
+							}else{
+                                return '否';
+							}
+                        }
+                    },  {
+                        field: 'update_date',
+                        title: '更新时间',
+                        sortable: true,
+                        formatter:function(value, row, index){
+                            var dateTime = new Date(value);
+                            var localeString = dateTime.toLocaleString();
+                            return localeString;
                         }
                     }]
 
@@ -211,7 +211,7 @@
                         return;
                     }
                     top.layer.confirm('确认要彻底删除数据吗?', {icon: 3, title:'系统提示'}, function(index){
-                        $.get("/question/deleteAll?ids=" + ids, function(data){
+                        $.get("/appVersion/deleteAll?ids=" + ids, function(data){
                             if(data.code==0){
                                 $('#table').bootstrapTable('refresh');
                                 top.layer.msg(data.message, {icon:1});
@@ -224,7 +224,7 @@
                 }
                 // 修改
                 function edit(){
-                    window.location = "/question/edit?id=" + getIdSelections();
+                    window.location = "/appVersion/edit?id=" + getIdSelections();
                 }
                 //获取选中的id
                 function getIdSelections() {

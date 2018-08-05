@@ -1,15 +1,15 @@
 package com.renwu.backendapp.wallet.entity;
 
+import com.renwu.backendapp.core.model.BaseEntity;
+
 import java.util.Date;
 
 /**
  *  APP应用版本信息
  * @author ChenZhang
  */
-public class AppVersion {
+public class AppVersion extends BaseEntity {
     private int id; // 主键，自增
-    private Date create_date; //创建时间
-    private Date update_date; //更新时间
     private String version; //应用版本号码
     private String title; //标题名称
     private String note; //更新说明
@@ -31,14 +31,6 @@ public class AppVersion {
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
-    }
-
-    public Date getUpdate_date() {
-        return update_date;
-    }
-
-    public void setUpdate_date(Date update_date) {
-        this.update_date = update_date;
     }
 
     public String getVersion() {

@@ -1,9 +1,8 @@
 package com.renwu.backendapp.wallet.service;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.renwu.backendapp.wallet.entity.Question;
-import com.renwu.backendapp.wallet.mapper.QuestionMapper;
+import com.renwu.backendapp.wallet.entity.AppVersion;
+import com.renwu.backendapp.wallet.mapper.AppVersionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +10,10 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class QuestionService {
+public class AppVersionService {
 
     @Autowired
-    QuestionMapper mapper;
+    AppVersionMapper mapper;
 
     /**
      * 获取问题列表
@@ -23,23 +22,28 @@ public class QuestionService {
      * pageNum 开始页数
      * pageSize 每页显示的数据条数
      * */
-    public PageInfo<Question> getQuestionList(Question entity) {
-        List<Question> questions = mapper.findList(entity);
+    public PageInfo<AppVersion> getAppVersionList(AppVersion entity) {
+        List<AppVersion> questions = mapper.findList(entity);
         PageInfo result = new PageInfo(questions);
         return result;
     }
 
     /**
-     * 保存数据
+     * 新增数据
      * @param entity
      * @return
      * @throws Exception
      */
-    public int save(Question entity) throws Exception{
+    public int save(AppVersion entity) throws Exception{
         int code = 0;
         entity.setUpdate_date(new Date());
         entity.setCreate_date(new Date());
+        entity.setIs_new(1);
         code = mapper.save(entity);
+        if(code>0){
+            //更新其他信息is_new
+            mapper.updateOther(entity);
+        }
         return code;
     }
 
@@ -51,11 +55,11 @@ public class QuestionService {
         mapper.delete(id);
     }
 
-    public Question findOne(int id) {
+    public AppVersion findOne(int id) {
         return mapper.findOne(id);
     }
 
-    public int edit(Question entity) {
+    public int edit(AppVersion entity) {
         int code = 0;
         entity.setUpdate_date(new Date());
         code = mapper.update(entity);

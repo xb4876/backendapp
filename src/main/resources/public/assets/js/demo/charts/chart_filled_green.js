@@ -7,43 +7,61 @@
 "use strict";
 
 $(document).ready(function(){
+    refreshChart();
+    <!-- 刷新图表 -->
+    function refreshChart() {
+        var putUrl = '/admin/appuse/weekActive';
+        $.ajax({
+            url: putUrl, //请求地址
+            type: "POST",  //提交类似
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            success: function (response) {
+                var dataValue = []; //y轴数据
+                var ticks = []; //x轴数据
+                $(response).each(function (index, value) {
+                    dataValue.push([index+1,response[index].activeCount]);
+                    ticks.push([index+1,response[index].dateTime]);
+                });
+                if(response){
+                    // Sample Data
+                    //var d1 = [[1262304000000, 17], [1264982400000, 600], [1267401600000, 1200], [1270080000000, 1000], [1272672000000, 2000], [1275350400000, 2300], [1277942400000, 2700], [1280620800000, 2000], [1283299200000, 1300], [1285891200000, 1000], [1288569600000, 2300], [1291161600000, 2000]];
 
-	// Sample Data
-	var d1 = [[1262304000000, 17], [1264982400000, 600], [1267401600000, 1200], [1270080000000, 1000], [1272672000000, 2000], [1275350400000, 2300], [1277942400000, 2700], [1280620800000, 2000], [1283299200000, 1300], [1285891200000, 1000], [1288569600000, 2300], [1291161600000, 2000]];
+                    var DataSet = [
+                        { label: "周活跃量", data: dataValue, color: App.getLayoutColorCode('green') }
+                    ];
 
-	var data1 = [
-		{ label: "全部点击", data: d1, color: App.getLayoutColorCode('green') }
-	];
+                    $.plot("#chart_filled_green", DataSet, $.extend(true, {}, Plugins.getFlotDefaults(), {
+                        xaxis: {
+                            ticks: ticks,//x轴自定义刻度数据
+                        },
+                    	series: {
+                            lines: {
+                                fill: true,
+                                lineWidth: 1.5
+                            },
+                            points: {
+                                show: true,
+                                radius: 2.5,
+                                lineWidth: 1.1
+                            }
+                        },
+                        grid: {
+                            hoverable: true,
+                            clickable: true
+                        },
+                        tooltip: true,
+                        tooltipOpts: {
+                            content: '%s: %y'
+                        }
+                    }));
 
-	$.plot("#chart_filled_green", data1, $.extend(true, {}, Plugins.getFlotDefaults(), {
-		xaxis: {
-			min: (new Date(2009, 12, 1)).getTime(),
-			max: (new Date(2010, 11, 2)).getTime(),
-			mode: "time",
-			tickSize: [1, "month"],
-			monthNames: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"],
-			tickLength: 0
-		},
-		series: {
-			lines: {
-				fill: true,
-				lineWidth: 1.5
-			},
-			points: {
-				show: true,
-				radius: 2.5,
-				lineWidth: 1.1
-			}
-		},
-		grid: {
-			hoverable: true,
-			clickable: true
-		},
-		tooltip: true,
-		tooltipOpts: {
-			content: '%s: %y'
-		}
-	}));
+                }
 
-
+            },
+            error: function (response) {
+                alert('refresh failed!!!');
+            }
+        })
+    }
 });

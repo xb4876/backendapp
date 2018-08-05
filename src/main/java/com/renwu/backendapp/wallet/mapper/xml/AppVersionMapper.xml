@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.renwu.backendapp.wallet.mapper.AppVersionMapper" >
+    <resultMap id="BaseResultMap" type="com.renwu.backendapp.wallet.entity.AppVersion" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="create_date" property="create_date" jdbcType="DATE" />
+        <result column="update_date" property="update_date" jdbcType="DATE" />
+        <result column="version" property="version" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="note" property="note" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="iosurl" property="iosurl" jdbcType="VARCHAR" />
+        <result column="is_new" property="is_new" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="versionColumns">
+        id,
+        create_date,
+        update_date,
+        version,
+        title,
+        note,
+        url,
+        iosurl,
+        is_new
+	</sql>
+
+    <select id="findOne" resultMap="BaseResultMap" >
+        select
+          <include refid="versionColumns"/>
+        from sys_app_version
+        where id = #{id}
+    </select>
+
+    <select id="findList" resultMap="BaseResultMap">
+        select
+          <include refid="versionColumns"/>
+        from sys_app_version
+        WHERE 1=1
+        <if test="entity.note != null and entity.note != ''">
+            AND note LIKE concat('%',#{#{entity.note}},'%')
+        </if>
+        <if test="entity.title != null and entity.title != ''">
+            AND title LIKE concat('%',#{entity.title},'%')
+        </if>
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_app_version(
+			id,
+            create_date,
+            update_date,
+            version,
+            title,
+            note,
+            url,
+            iosurl,
+            is_new
+		) VALUES (
+			#{id},
+			#{create_date},
+			#{update_date},
+			#{version},
+			#{title},
+			#{note},
+			#{url},
+			#{iosurl},
+			#{is_new}
+		)
+	</insert>
+
+    <!-- 更新版本 -->
+    <update id="update">
+		UPDATE sys_app_version SET
+            update_date = #{update_date},
+            version = #{version},
+            title = #{title},
+            note = #{note},
+            url = #{url},
+            iosurl = #{iosurl},
+            is_new = #{is_new}
+		WHERE id = #{id}
+	</update>
+
+    <!-- 更新其他版本is_new状态 -->
+    <update id="updateOther">
+		UPDATE sys_app_version SET
+			is_new = 0,
+			update_date = #{entity.update_date}
+		WHERE id != #{entity.id}
+	</update>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+		DELETE FROM sys_app_version WHERE id = #{id}
+	</delete>
+
+</mapper>

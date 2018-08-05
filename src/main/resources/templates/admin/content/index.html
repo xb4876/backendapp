@@ -30,8 +30,8 @@
 				<ul class="page-stats">
 					<li>
 						<div class="summary">
-							<span>新订单(模拟)</span>
-							<h3>17,561</h3>
+							<span>用户数量</span>
+							<h3 th:text="${userCount}"></h3>
 						</div>
 						<div id="sparkline-bar" class="graph sparkline hidden-xs">20,15,8,50,20,40,20,30,20,15,30,20,25,20</div>
 						<!-- Use instead of sparkline e.g. this:
@@ -40,8 +40,8 @@
 					</li>
 					<li>
 						<div class="summary">
-							<span>我的余额(模拟)</span>
-							<h3>$21,561.21</h3>
+							<span>活跃量(当日)</span>
+							<h3 th:text="${dayActive}"></h3>
 						</div>
 						<div id="sparkline-bar2" class="graph sparkline hidden-xs">20,15,8,50,20,40,20,30,20,15,30,20,25,20</div>
 					</li>
@@ -52,8 +52,8 @@
 
 			<!--=== Page Content ===-->
 			<!--=== Statboxes ===-->
-			<div class="row row-bg">
-				<!-- .row-bg -->
+			<!--<div class="row row-bg">
+				&lt;!&ndash; .row-bg &ndash;&gt;
 
 				<div class="col-sm-6 col-md-6">
 					<div class="statbox widget box box-shadow">
@@ -67,9 +67,9 @@
 								class="pull-right icon-angle-right"></i></a>
 						</div>
 					</div>
-					<!-- /.smallstat -->
+					&lt;!&ndash; /.smallstat &ndash;&gt;
 				</div>
-				<!-- /.col-md-3 -->
+				&lt;!&ndash; /.col-md-3 &ndash;&gt;
 
 				<div class="col-sm-6 col-md-6">
 					<div class="statbox widget box box-shadow">
@@ -83,11 +83,11 @@
 								class="pull-right icon-angle-right"></i></a>
 						</div>
 					</div>
-					<!-- /.smallstat -->
+					&lt;!&ndash; /.smallstat &ndash;&gt;
 				</div>
-				<!-- /.col-md-3 -->
+				&lt;!&ndash; /.col-md-3 &ndash;&gt;
 
-			</div>
+			</div>-->
 			<!-- /.row -->
 			<!-- /Statboxes -->
 
@@ -143,7 +143,7 @@
 					<div class="widget box">
 						<div class="widget-header">
 							<h4>
-								<i class="icon-reorder"></i> 填充图表 (模拟)
+								<i class="icon-reorder"></i> 周活跃量
 							</h4>
 							<div class="toolbar no-padding">
 								<div class="btn-group">
@@ -181,7 +181,7 @@
 					<div class="widget box">
 						<div class="widget-header">
 							<h4>
-								<i class="icon-reorder"></i> 填充图表 (模拟)
+								<i class="icon-reorder"></i> 装机量 (机型)
 							</h4>
 							<div class="toolbar no-padding">
 								<div class="btn-group">

@@ -46,7 +46,7 @@
 		)
 	</insert>
 
-    <!-- 更新问题 -->
+    <!-- 更新单页 -->
     <update id="update">
 		UPDATE sys_single SET
 			title = #{title},

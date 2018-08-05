@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.renwu.backendapp.wallet.mapper.AppUseMapper" >
+    <resultMap id="BaseResultMap" type="com.renwu.backendapp.wallet.entity.AppUse" >
+        <result column="activeCount" property="activeCount" jdbcType="INTEGER" />
+        <result column="dateTime" property="dateTime" jdbcType="VARCHAR" />
+        <result column="dev_model" property="dev_model" jdbcType="VARCHAR" />
+        <result column="devCount" property="devCount" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 根据手机型号统计安装数量 -->
+    <select id="devCount" resultMap="BaseResultMap">
+        SELECT
+            COUNT(u.id) as devCount,
+            dev_model
+		FROM
+			sys_app_use u
+		WHERE
+			 use_type = 1
+		GROUP BY dev_model
+		ORDER BY dev_model;
+    </select>
+
+    <!-- 周活跃量 -->
+    <select id="weekActive" resultMap="BaseResultMap">
+        SELECT
+          COUNT(u.dev_no) as activeCount,
+          substring_index(u.create_date," ",1) as dateTime
+        FROM
+        sys_app_use u
+        WHERE
+        DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[<=]]> date(create_date) AND use_type = 2
+        GROUP BY dateTime
+        ORDER BY dateTime;
+    </select>
+
+    <!-- app用户数量 -->
+    <select id="userCount" resultType="java.lang.Integer" >
+       SELECT COUNT(DISTINCT dev_no) FROM sys_app_use;
+    </select>
+
+    <!-- 日活跃量 -->
+    <select id="dayActive" resultType="java.lang.Integer" >
+        SELECT
+	      COUNT(1)
+        FROM
+            sys_app_use
+        WHERE
+            to_days(create_date) = to_days(now())
+        AND use_type = 2;
+    </select>
+
+</mapper>

@@ -14,7 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
+/**
+ * 问题反馈controller
+ * @author xb4876
+ */
 @Controller
 @RequestMapping(value = "/problem")
 public class ProblemController extends BaseController {
