@@ -53,8 +53,19 @@ public class SinglePageService {
         int code = 0;
         entity.setUpdate_date(new Date());
         entity.setCreate_date(new Date());
-        entity.setModule(PinyinUtils.ToFirstChar(entity.getModule_name()));
         code = mapper.save(entity);
+        return code;
+    }
+
+    /**
+     * 编辑
+     * @param entity
+     * @return
+     */
+    public int edit(SinglePage entity) {
+        int code = 0;
+        entity.setUpdate_date(new Date());
+        code = mapper.update(entity);
         return code;
     }
 
@@ -75,16 +86,4 @@ public class SinglePageService {
         return mapper.findOne(id);
     }
 
-    /**
-     * 编辑
-     * @param entity
-     * @return
-     */
-    public int edit(SinglePage entity) {
-        int code = 0;
-        entity.setUpdate_date(new Date());
-        entity.setModule(PinyinUtils.ToFirstChar(entity.getModule_name()));
-        code = mapper.update(entity);
-        return code;
-    }
 }

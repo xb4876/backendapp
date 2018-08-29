@@ -136,6 +136,7 @@
 
         $("#inputForm").validate({
             submitHandler: function (form) {
+                //版本号不能重复  验证
                 form.submit();
             },
             errorContainer: "#messageBox",

@@ -5,61 +5,57 @@
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="create_date" property="create_date" jdbcType="DATE" />
         <result column="update_date" property="update_date" jdbcType="DATE" />
-        <result column="title" property="title" jdbcType="VARCHAR" />
         <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
-        <result column="module_name" property="module_name" jdbcType="VARCHAR" />
-        <result column="module" property="module" jdbcType="VARCHAR" />
+        <result column="dict_name" property="dict_name" jdbcType="VARCHAR" />
+        <result column="dict_type" property="dict_type" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="findOne" resultMap="BaseResultMap" >
-        select id,title,detail,module,module_name
-        from sys_single
+        select id,detail,dict_type,dict_name
+        from sys_about
         where id = #{id}
     </select>
 
     <select id="findList" resultMap="BaseResultMap">
-        select id,title,detail,module,module_name
-        from sys_single
+        select id,detail,dict_type,dict_name
+        from sys_about
         WHERE 1=1
-        <if test="entity.module != null and entity.module != ''">
-            AND module = #{entity.module}
+        <if test="entity.dict_type != null and entity.dict_type != ''">
+            AND dict_type = #{entity.dict_type}
         </if>
     </select>
 
     <insert id="save">
-		INSERT INTO sys_single(
+		INSERT INTO sys_about(
 			id,
-			title,
 			update_date,
 			create_date,
             detail,
-            module,
-            module_name
+            dict_type,
+            dict_name
 		) VALUES (
 			#{id},
-			#{title},
 			#{update_date},
 			#{create_date},
 			#{detail},
-			#{module},
-			#{module_name}
+			#{dict_type},
+			#{dict_name}
 		)
 	</insert>
 
     <!-- 更新单页 -->
     <update id="update">
-		UPDATE sys_single SET
-			title = #{title},
+		UPDATE sys_about SET
 			update_date = #{update_date},
 			detail = #{detail},
-			module = #{module},
-			module_name = #{module_name}
+			dict_type = #{dict_type},
+			dict_name = #{dict_name}
 		WHERE id = #{id}
 	</update>
 
     <!-- 删除数据 -->
     <delete id="delete">
-		DELETE FROM sys_single WHERE id = #{id}
+		DELETE FROM sys_about WHERE id = #{id}
 	</delete>
 
 </mapper>

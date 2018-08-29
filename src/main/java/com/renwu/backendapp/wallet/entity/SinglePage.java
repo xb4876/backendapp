@@ -10,8 +10,8 @@ import java.util.Date;
  */
 public class SinglePage extends BaseEntity {
     private Integer id;// 主键，自增
-    private String module_name;//所属模块，（协议；服务；隐私条款）
-    private String module;//模块名称
+    private String dict_name;//类型名称
+    private String dict_type;//类型标识符，（例如app中的关于我们的信息）
     private String title;// 标题
     private String detail;// 内容
 
@@ -23,36 +23,20 @@ public class SinglePage extends BaseEntity {
         this.id = id;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public String getDict_name() {
+        return dict_name;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setDict_name(String dict_name) {
+        this.dict_name = dict_name;
     }
 
-    public Date getUpdate_date() {
-        return update_date;
+    public String getDict_type() {
+        return dict_type;
     }
 
-    public void setUpdate_date(Date update_date) {
-        this.update_date = update_date;
-    }
-
-    public String getModule_name() {
-        return module_name;
-    }
-
-    public void setModule_name(String module_name) {
-        this.module_name = module_name;
-    }
-
-    public String getModule() {
-        return module;
-    }
-
-    public void setModule(String module) {
-        this.module = module;
+    public void setDict_type(String dict_type) {
+        this.dict_type = dict_type;
     }
 
     public String getTitle() {
@@ -70,5 +54,4 @@ public class SinglePage extends BaseEntity {
     public void setDetail(String detail) {
         this.detail = detail;
     }
-
 }

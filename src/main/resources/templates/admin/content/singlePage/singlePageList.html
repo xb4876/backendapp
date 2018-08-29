@@ -46,37 +46,6 @@
 						</div>
 						<div class="panel-body">
 
-							<!-- 搜索 -->
-							<div class="accordion-group">
-								<div id="collapseTwo" class="accordion-body collapse">
-									<div class="accordion-inner">
-										<form id="searchForm" class="form form-horizontal well clearfix" >
-											<div class="col-xs-12 col-sm-6 col-md-4">
-												<label class="label-item single-overflow pull-left" title="分类：">分类：</label>
-												<select id="type" name="type" class="select2" style="width: 100%">
-													<option value="0" selected="selected">请选择类型</option>
-													<option value="1">新手指南</option>
-													<option value="2">钱包安全</option>
-													<option value="3">基础教程</option>
-													<option value="4">转账/收款</option>
-													<option value="5">区块链知识</option>
-												</select>
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-4">
-												<label class="label-item single-overflow pull-left" title="标题：">标题：</label>
-												<input id="title" name="title" type="text" maxlength="50" class="form-control"/>
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-4">
-												<div style="margin-top:26px">
-													<a  id="search" class="btn btn-primary btn-rounded  btn-bordered btn-sm"><i class="icon-search"></i> 查询</a>
-													<a  id="reset" class="btn btn-primary btn-rounded  btn-bordered btn-sm" ><i class="icon-refresh"></i> 重置</a>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-
 							<!-- 工具栏 -->
 							<div id="toolbar">
 									<button id="edit" class="btn btn-success" disabled onclick="edit()">
@@ -155,16 +124,12 @@
                         title: 'ID',
                         sortable: true,
                     }, {
-                        field: 'title',
-                        title: '标题',
+                        field: 'dict_name',
+                        title: '类型名称',
                         sortable: true
                     }, {
-                        field: 'module_name',
-                        title: '模块名称',
-                        sortable: true
-                    }, {
-                        field: 'module',
-                        title: '所属模块',
+                        field: 'dict_type',
+                        title: '类型',
                         sortable: true
                     }, {
                         field: 'operate',
