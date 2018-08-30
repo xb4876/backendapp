@@ -24,4 +24,6 @@ public interface AppVersionMapper {
 
     //更新其他信息is_new
     void updateOther(@Param("entity") AppVersion entity);
+
+    AppVersion checkVersion(@Param("version") String version);
 }

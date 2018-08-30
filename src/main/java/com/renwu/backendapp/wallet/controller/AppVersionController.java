@@ -28,7 +28,7 @@ public class AppVersionController extends BaseController {
 
 
 	/**
-	 * 帮助中心列表页面
+	 * 版本列表页面
 	 *
 	 * @param model
 	 * @return
@@ -40,7 +40,7 @@ public class AppVersionController extends BaseController {
 	}
 
 	/**
-	 * 获取问题列表
+	 * 获取版本列表数据
 	 * @return
 	 */
 	@ResponseBody
@@ -51,8 +51,19 @@ public class AppVersionController extends BaseController {
 		PageInfo result = service.getAppVersionList(appVersion);
 		return getBootstrapData(result);
 	}
+
 	/**
-	 * 问题增加表单
+	 * 检查版本是否重复
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "checkVersion", method = RequestMethod.GET)
+	public Boolean checkVersion(AppVersion appVersion) {
+		return service.checkVersion(appVersion);
+	}
+
+	/**
+	 * 版本增加表单
 	 *
 	 * @param model
 	 * @return
@@ -67,7 +78,7 @@ public class AppVersionController extends BaseController {
 	}
 
 	/**
-	 * 问题修改表单
+	 * 版本修改表单
 	 *
 	 * @param model
 	 * @return
@@ -80,7 +91,7 @@ public class AppVersionController extends BaseController {
 	}
 
 	/**
-	 * 问题新增提交操作
+	 * 版本新增提交操作
 	 *
 	 * @param appVersion
 	 * @return
@@ -103,7 +114,7 @@ public class AppVersionController extends BaseController {
 	}
 
 	/**
-	 * 问题修改提交操作
+	 * 版本修改提交操作
 	 *
 	 * @param appVersion
 	 * @return
@@ -126,7 +137,7 @@ public class AppVersionController extends BaseController {
 	}
 
 	/**
-	 * 问题删除操作
+	 * 版本删除操作
 	 * @param model
 	 * @param id
 	 * @return

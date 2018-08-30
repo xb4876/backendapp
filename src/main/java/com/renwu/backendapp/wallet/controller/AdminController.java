@@ -1,7 +1,9 @@
 package com.renwu.backendapp.wallet.controller;
 
 import com.renwu.backendapp.wallet.entity.AppUse;
+import com.renwu.backendapp.wallet.entity.Question;
 import com.renwu.backendapp.wallet.service.AppUseService;
+import com.renwu.backendapp.wallet.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ public class AdminController {
 	@Autowired
 	private AppUseService service;
 
+	@Autowired
+	private QuestionService questionService;
 	/**
 	 * 管理主界面
 	 * 
@@ -28,6 +32,11 @@ public class AdminController {
 		model.addAttribute("dashboard", true);
 		model.addAttribute("userCount", service.userCount());//用户数量
 		model.addAttribute("dayActive", service.dayActive());//日活跃量
+		//热门文章（前三）
+		List<Question> questionList = questionService.getQuestion3(new Question());
+		for (int i = 0; i < questionList.size(); i++) {
+			model.addAttribute("top"+i, questionList.get(i).getTitle());
+		}
 		return "admin/index";
 	}
 

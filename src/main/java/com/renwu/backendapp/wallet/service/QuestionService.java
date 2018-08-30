@@ -61,4 +61,13 @@ public class QuestionService {
         code = mapper.update(entity);
         return code;
     }
+
+    /**
+     * 获取帮助中心前三
+     * @param question
+     * @return
+     */
+    public List<Question> getQuestion3(Question question) {
+        return mapper.getQuestion3(question);
+    }
 }

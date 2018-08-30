@@ -12,6 +12,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,7 +43,7 @@ public class QuestionController extends BaseController {
 	}
 
 	/**
-	 * 获取问题列表
+	 * 获取帮助中心问题列表
 	 * @return
 	 */
 	@ResponseBody
@@ -52,8 +54,19 @@ public class QuestionController extends BaseController {
 		PageInfo result = service.getQuestionList(question);
 		return getBootstrapData(result);
 	}
+
 	/**
-	 * 问题增加表单
+	 * 获取帮助中心前三
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getQuestionTop3", method = RequestMethod.GET)
+	public List<Question> getQuestionTop3(Question question) {
+		return service.getQuestion3(question);
+	}
+
+	/**
+	 * 帮助中心问题增加表单
 	 *
 	 * @param model
 	 * @return
@@ -66,7 +79,7 @@ public class QuestionController extends BaseController {
 	}
 
 	/**
-	 * 问题修改表单
+	 * 帮助中心问题修改表单
 	 *
 	 * @param model
 	 * @return
@@ -79,7 +92,7 @@ public class QuestionController extends BaseController {
 	}
 
 	/**
-	 * 问题新增提交操作
+	 * 帮助中心问题新增提交操作
 	 *
 	 * @param question
 	 * @return
@@ -101,7 +114,7 @@ public class QuestionController extends BaseController {
 	}
 
 	/**
-	 * 问题修改提交操作
+	 * 帮助中心问题修改提交操作
 	 *
 	 * @param question
 	 * @return
@@ -124,7 +137,7 @@ public class QuestionController extends BaseController {
 	}
 
 	/**
-	 * 问题删除操作
+	 * 帮助中心问题删除操作
 	 * @param model
 	 * @param id
 	 * @return

@@ -23,4 +23,6 @@ public interface QuestionMapper {
     void delete(String id);
 
     Question findOne(int id);
+
+    List<Question> getQuestion3(@Param("entity")Question entity);
 }

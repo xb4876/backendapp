@@ -97,38 +97,54 @@
 					<div class="widget box">
 						<div class="widget-header">
 							<h4>
-								<i class="icon-reorder"></i> 系统资源使用情况
+								<i class="icon-reorder"></i> 热门文章
 							</h4>
-							<div class="toolbar no-padding">
-								<div class="btn-group">
-									<span class="btn btn-xs circular-charts-reload"><i
-										class="icon-refresh"></i> 刷新</span> <span
-										class="btn btn-xs widget-collapse"><i
-										class="icon-angle-down"></i></span>
-								</div>
-							</div>
+							<!--<div class="toolbar no-padding">-->
+								<!--<div class="btn-group">-->
+									<!--<span class="btn btn-xs circular-charts-reload"><i-->
+										<!--class="icon-refresh"></i> 刷新</span> <span-->
+										<!--class="btn btn-xs widget-collapse"><i-->
+										<!--class="icon-angle-down"></i></span>-->
+								<!--</div>-->
+							<!--</div>-->
 						</div>
 						<div class="widget-content">
 							<ul class="stats">
 								<li class="circular-chart-inline">
-									<div class="circular-chart demo-reload" data-percent="62">
-										<span>62</span>%
-									</div> <a href="javascript:void(0);" class="description">CPU <i
-										class="icon-angle-right"></i></a>
+									<a href="#" class="stat hvr-wobble-horizontal">
+										<div class=" stat-icon">
+											<i class="fa fa-flag fa-4x text-danger "></i>
+										</div>
+										<div class=" stat-label">
+											<div class="label-header">
+												<span th:text="${top0}"></span>
+											</div>
+										</div>
+									</a>
 								</li>
 								<li class="circular-chart-inline">
-									<div class="circular-chart demo-reload" data-percent="80"
-										data-bar-color="#e25856">
-										-<span>80</span>%
-									</div> <a href="javascript:void(0);" class="description">内存 <i
-										class="icon-angle-right"></i></a>
+									<a href="#" class="stat hvr-wobble-horizontal">
+										<div class=" stat-icon">
+											<i class="fa fa-flag fa-4x text-danger "></i>
+										</div>
+										<div class=" stat-label">
+											<div class="label-header">
+												<span th:text="${top1}"></span>
+											</div>
+										</div>
+									</a>
 								</li>
 								<li class="circular-chart-inline">
-									<div class="circular-chart demo-reload" data-percent="26"
-										data-bar-color="#8fc556">
-										<span>26</span>%
-									</div> <a href="javascript:void(0);" class="description">磁盘 <i
-										class="icon-angle-right"></i></a>
+									<a href="#" class="stat hvr-wobble-horizontal">
+										<div class=" stat-icon">
+											<i class="fa fa-flag fa-4x text-danger "></i>
+										</div>
+										<div class=" stat-label">
+											<div class="label-header">
+												<span th:text="${top2}"></span>
+											</div>
+										</div>
+									</a>
 								</li>
 							</ul>
 						</div>
@@ -139,7 +155,7 @@
 
 			<!--=== Filled Charts ===-->
 			<div class="row row-bg">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="widget box">
 						<div class="widget-header">
 							<h4>
@@ -158,26 +174,26 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
-					<div class="widget box">
-						<div class="widget-header">
-							<h4>
-								<i class="icon-reorder"></i> 填充图表 (模拟)
-							</h4>
-							<div class="toolbar no-padding">
-								<div class="btn-group">
-									<span class="btn btn-xs widget-collapse"><i
-										class="icon-angle-down"></i></span>
-								</div>
-							</div>
-						</div>
-						<div class="widget-content">
-							<div id="chart_filled_red" class="chart"></div>
-						</div>
-					</div>
-				</div>
+				<!--<div class="col-md-4">-->
+					<!--<div class="widget box">-->
+						<!--<div class="widget-header">-->
+							<!--<h4>-->
+								<!--<i class="icon-reorder"></i> 填充图表 (模拟)-->
+							<!--</h4>-->
+							<!--<div class="toolbar no-padding">-->
+								<!--<div class="btn-group">-->
+									<!--<span class="btn btn-xs widget-collapse"><i-->
+										<!--class="icon-angle-down"></i></span>-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div class="widget-content">-->
+							<!--<div id="chart_filled_red" class="chart"></div>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
 
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="widget box">
 						<div class="widget-header">
 							<h4>

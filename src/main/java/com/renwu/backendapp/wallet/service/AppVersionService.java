@@ -65,4 +65,14 @@ public class AppVersionService {
         code = mapper.update(entity);
         return code;
     }
+
+    public Boolean checkVersion(AppVersion appVersion) {
+        AppVersion check = mapper.checkVersion(appVersion.getVersion());
+        //根据版本号查询数据  不为null则版本号重复
+        if(check!=null){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

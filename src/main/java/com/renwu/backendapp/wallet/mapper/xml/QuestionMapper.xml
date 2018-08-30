@@ -18,6 +18,13 @@
         where id = #{id}
     </select>
 
+    <select id="getQuestion3" resultMap="BaseResultMap" >
+        SELECT id,type,title,detail,orderby,viewnum
+        FROM sys_help
+        ORDER BY viewnum
+        DESC LIMIT 0,3
+    </select>
+
     <select id="findList" resultMap="BaseResultMap">
         select id,type,title,detail,orderby,viewnum
         from sys_help
