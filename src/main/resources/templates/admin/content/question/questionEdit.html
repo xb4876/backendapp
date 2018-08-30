@@ -129,7 +129,13 @@
     <!-- /.container -->
     <script type="text/javascript">
         //实例化编辑器
-        var um = UM.getEditor('myEditor');
+        var um = UM.getEditor('myEditor', {
+            toolbar:[
+                'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
+                'insertorderedlist insertunorderedlist | selectall cleardoc paragraph | fontfamily fontsize' ,
+                '| justifyleft justifycenter justifyright justifyjustify '
+            ]
+        });
         //对编辑器的操作最好在编辑器ready之后再做
         um.ready(function () {
             //设置编辑器的内容

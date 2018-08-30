@@ -34,7 +34,7 @@ public class SwaggerConfig {
 
 	@SuppressWarnings("deprecation")
 	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfo("人物科技 API 手册", "API手册", "0.1.0", "Terms of service", "support@ren-wu.cn",
+		ApiInfo apiInfo = new ApiInfo("大本盈冷钱包 API 手册", "API手册", "0.1.0", "Terms of service", "support@ren-wu.cn",
 				"Apache 2.0", "");
 		return apiInfo;
 	}
