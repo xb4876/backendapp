@@ -63,11 +63,19 @@ public class QuestionService {
     }
 
     /**
-     * 获取帮助中心前三
+     * 获取帮助中心前十
      * @param question
      * @return
      */
     public List<Question> getQuestion3(Question question) {
         return mapper.getQuestion3(question);
+    }
+
+    /**
+     * 累计反馈数量
+     * @return
+     */
+    public int allHelpCount() {
+        return mapper.allHelpCount();
     }
 }

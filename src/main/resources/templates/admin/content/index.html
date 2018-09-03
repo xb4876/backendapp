@@ -30,20 +30,15 @@
 				<ul class="page-stats">
 					<li>
 						<div class="summary">
-							<span>用户数量</span>
+							<span><i class="icon-user"></i> 用户数量</span>
 							<h3 th:text="${userCount}"></h3>
 						</div>
-						<div id="sparkline-bar" class="graph sparkline hidden-xs">20,15,8,50,20,40,20,30,20,15,30,20,25,20</div>
-						<!-- Use instead of sparkline e.g. this:
-							<div class="graph circular-chart" data-percent="73">73%</div>
-							-->
 					</li>
 					<li>
 						<div class="summary">
-							<span>活跃量(当日)</span>
+							<span><i class="icon-star"></i> 活跃量(当日)</span>
 							<h3 th:text="${dayActive}"></h3>
 						</div>
-						<div id="sparkline-bar2" class="graph sparkline hidden-xs">20,15,8,50,20,40,20,30,20,15,30,20,25,20</div>
 					</li>
 				</ul>
 				<!-- /Page Stats -->
@@ -51,115 +46,196 @@
 			<!-- /Page Header -->
 
 			<!--=== Page Content ===-->
+
 			<!--=== Statboxes ===-->
-			<!--<div class="row row-bg">
-				&lt;!&ndash; .row-bg &ndash;&gt;
+			<!--<div class="row row-bg">-->
+				<!--&lt;!&ndash; .row-bg &ndash;&gt;-->
 
-				<div class="col-sm-6 col-md-6">
-					<div class="statbox widget box box-shadow">
-						<div class="widget-content">
-							<div class="visual red">
-								<i class="icon-user"></i>
-							</div>
-							<div class="title">用户数量</div>
-							<div class="value" th:text="${userscount}"></div>
-							<a class="more" th:href="@{/admin/user}">查看更多 <i
-								class="pull-right icon-angle-right"></i></a>
-						</div>
-					</div>
-					&lt;!&ndash; /.smallstat &ndash;&gt;
-				</div>
-				&lt;!&ndash; /.col-md-3 &ndash;&gt;
+				<!--<div class="col-sm-6 col-md-6">-->
+					<!--<div class="statbox widget box box-shadow">-->
+						<!--<div class="widget-content">-->
+							<!--<div class="visual red">-->
+								<!--<i class="icon-star"></i>-->
+							<!--</div>-->
+							<!--<div class="title">累计装机量</div>-->
+							<!--<div class="value" th:text="${userscount}"></div>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--&lt;!&ndash; /.smallstat &ndash;&gt;-->
+				<!--</div>-->
+				<!--&lt;!&ndash; /.col-md-3 &ndash;&gt;-->
 
-				<div class="col-sm-6 col-md-6">
-					<div class="statbox widget box box-shadow">
-						<div class="widget-content">
-							<div class="visual yellow">
-								<i class="icon-dollar"></i>
-							</div>
-							<div class="title">新闻数量</div>
-							<div class="value" th:text="${newscount}"></div>
-							<a class="more" th:href="@{/admin/news}">查看更多 <i
-								class="pull-right icon-angle-right"></i></a>
-						</div>
-					</div>
-					&lt;!&ndash; /.smallstat &ndash;&gt;
-				</div>
-				&lt;!&ndash; /.col-md-3 &ndash;&gt;
+				<!--<div class="col-sm-6 col-md-6">-->
+					<!--<div class="statbox widget box box-shadow">-->
+						<!--<div class="widget-content">-->
+							<!--<div class="visual yellow">-->
+								<!--<i class="icon-dollar"></i>-->
+							<!--</div>-->
+							<!--<div class="title">累计活跃量</div>-->
+							<!--<div class="value" th:text="${newscount}"></div>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--&lt;!&ndash; /.smallstat &ndash;&gt;-->
+				<!--</div>-->
+				<!--&lt;!&ndash; /.col-md-3 &ndash;&gt;-->
 
-			</div>-->
+			<!--</div>-->
 			<!-- /.row -->
 			<!-- /Statboxes -->
 
-			<!--=== Circular Charts ===-->
 			<div class="row">
-				<div class="col-md-12">
-					<div class="widget box">
-						<div class="widget-header">
-							<h4>
-								<i class="icon-reorder"></i> 热门文章
-							</h4>
-							<!--<div class="toolbar no-padding">-->
-								<!--<div class="btn-group">-->
-									<!--<span class="btn btn-xs circular-charts-reload"><i-->
-										<!--class="icon-refresh"></i> 刷新</span> <span-->
-										<!--class="btn btn-xs widget-collapse"><i-->
-										<!--class="icon-angle-down"></i></span>-->
-								<!--</div>-->
-							<!--</div>-->
+				<div class="col-lg-3 col-md-6">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-check-circle fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge"><h3 th:text="${newUseCount}"></h3></div>
+									<div>新增装机量</div>
+								</div>
+							</div>
 						</div>
-						<div class="widget-content">
-							<ul class="stats">
-								<li class="circular-chart-inline">
-									<a href="#" class="stat hvr-wobble-horizontal">
-										<div class=" stat-icon">
-											<i class="fa fa-flag fa-4x text-danger "></i>
-										</div>
-										<div class=" stat-label">
-											<div class="label-header">
-												<span th:text="${top0}"></span>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="circular-chart-inline">
-									<a href="#" class="stat hvr-wobble-horizontal">
-										<div class=" stat-icon">
-											<i class="fa fa-flag fa-4x text-danger "></i>
-										</div>
-										<div class=" stat-label">
-											<div class="label-header">
-												<span th:text="${top1}"></span>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="circular-chart-inline">
-									<a href="#" class="stat hvr-wobble-horizontal">
-										<div class=" stat-icon">
-											<i class="fa fa-flag fa-4x text-danger "></i>
-										</div>
-										<div class=" stat-label">
-											<div class="label-header">
-												<span th:text="${top2}"></span>
-											</div>
-										</div>
-									</a>
-								</li>
-							</ul>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-check-circle fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge"><h3 th:text="${allUseCount}"></h3></div>
+									<div>累计装机量</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-check-circle fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge"><h3 th:text="${allActiveCount}"></h3></div>
+									<div>累计活跃量</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-check-circle fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge"><h3 th:text="${allHelpCount}"></h3></div>
+									<div>累计反馈数量</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- /Circular Charts -->
+
+			<!--=== 热门文章 ===-->
+
+			<!--<div class="row">-->
+				<!--<div class="col-md-12">-->
+					<!--<div class="widget box">-->
+						<!--<div class="widget-header">-->
+							<!--<h4>-->
+								<!--<i class="icon-reorder"></i> 热门文章-->
+							<!--</h4>-->
+							<!--&lt;!&ndash;<div class="toolbar no-padding">&ndash;&gt;-->
+								<!--&lt;!&ndash;<div class="btn-group">&ndash;&gt;-->
+									<!--&lt;!&ndash;<span class="btn btn-xs circular-charts-reload"><i&ndash;&gt;-->
+										<!--&lt;!&ndash;class="icon-refresh"></i> 刷新</span> <span&ndash;&gt;-->
+										<!--&lt;!&ndash;class="btn btn-xs widget-collapse"><i&ndash;&gt;-->
+										<!--&lt;!&ndash;class="icon-angle-down"></i></span>&ndash;&gt;-->
+								<!--&lt;!&ndash;</div>&ndash;&gt;-->
+							<!--&lt;!&ndash;</div>&ndash;&gt;-->
+						<!--</div>-->
+						<!--<div class="widget-content">-->
+							<!--<ul class="stats">-->
+								<!--<li class="circular-chart-inline">-->
+									<!--<a href="#" class="stat hvr-wobble-horizontal">-->
+										<!--<div class=" stat-icon">-->
+											<!--<i class="fa fa-flag fa-4x text-danger "></i>-->
+										<!--</div>-->
+										<!--<div class=" stat-label">-->
+											<!--<div class="label-header">-->
+												<!--<span th:text="${top0}"></span>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</a>-->
+								<!--</li>-->
+								<!--<li class="circular-chart-inline">-->
+									<!--<a href="#" class="stat hvr-wobble-horizontal">-->
+										<!--<div class=" stat-icon">-->
+											<!--<i class="fa fa-flag fa-4x text-danger "></i>-->
+										<!--</div>-->
+										<!--<div class=" stat-label">-->
+											<!--<div class="label-header">-->
+												<!--<span th:text="${top1}"></span>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</a>-->
+								<!--</li>-->
+								<!--<li class="circular-chart-inline">-->
+									<!--<a href="#" class="stat hvr-wobble-horizontal">-->
+										<!--<div class=" stat-icon">-->
+											<!--<i class="fa fa-flag fa-4x text-danger "></i>-->
+										<!--</div>-->
+										<!--<div class=" stat-label">-->
+											<!--<div class="label-header">-->
+												<!--<span th:text="${top2}"></span>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</a>-->
+								<!--</li>-->
+							<!--</ul>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!-- /热门文章 -->
 
 			<!--=== Filled Charts ===-->
+			<div class="row row-bg">
+				<div class="col-md-12">
+					<div class="widget box">
+						<div class="widget-header">
+							<h4>
+								<i class="icon-reorder"></i> 问题Top10（阅读次数）
+							</h4>
+							<div class="toolbar no-padding">
+								<div class="btn-group">
+									<span class="btn btn-xs widget-collapse"><i
+											class="icon-angle-down"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="widget-content">
+							<div id="chart_filled_red" class="chart"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row row-bg">
 				<div class="col-md-6">
 					<div class="widget box">
 						<div class="widget-header">
 							<h4>
-								<i class="icon-reorder"></i> 周活跃量
+								<i class="icon-reorder"></i> 日活量（一周）
 							</h4>
 							<div class="toolbar no-padding">
 								<div class="btn-group">
@@ -174,30 +250,11 @@
 					</div>
 				</div>
 
-				<!--<div class="col-md-4">-->
-					<!--<div class="widget box">-->
-						<!--<div class="widget-header">-->
-							<!--<h4>-->
-								<!--<i class="icon-reorder"></i> 填充图表 (模拟)-->
-							<!--</h4>-->
-							<!--<div class="toolbar no-padding">-->
-								<!--<div class="btn-group">-->
-									<!--<span class="btn btn-xs widget-collapse"><i-->
-										<!--class="icon-angle-down"></i></span>-->
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="widget-content">-->
-							<!--<div id="chart_filled_red" class="chart"></div>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</div>-->
-
 				<div class="col-md-6">
 					<div class="widget box">
 						<div class="widget-header">
 							<h4>
-								<i class="icon-reorder"></i> 装机量 (机型)
+								<i class="icon-reorder"></i> 装机量 (机型Top5)
 							</h4>
 							<div class="toolbar no-padding">
 								<div class="btn-group">

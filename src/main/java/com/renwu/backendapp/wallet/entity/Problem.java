@@ -5,7 +5,7 @@ import com.renwu.backendapp.core.model.BaseEntity;
 import java.util.Date;
 
 /**
- * 问题反馈实体类
+ * 问题回复实体类
  * @author xb4876
  */
 public class Problem extends BaseEntity {
@@ -14,8 +14,8 @@ public class Problem extends BaseEntity {
     private int problem_type; //反馈类型，1产品建议；2程序错误；3其他
     private String problem_content;  // '反馈意见'
     private String problem_contact; // '联系方式'
-    private int feedback_state;// '反馈状态，0未反馈；1反馈'
-    private String feedback_result; // '反馈结果'
+    private int feedback_state;// '回复状态，0未回复；1回复'
+    private String feedback_result; // '回复结果'
 
     public Integer getId() {
         return id;

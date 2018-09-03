@@ -28,7 +28,7 @@ $(document).ready(function(){
                     //var d1 = [[1262304000000, 17], [1264982400000, 600], [1267401600000, 1200], [1270080000000, 1000], [1272672000000, 2000], [1275350400000, 2300], [1277942400000, 2700], [1280620800000, 2000], [1283299200000, 1300], [1285891200000, 1000], [1288569600000, 2300], [1291161600000, 2000]];
 
                     var DataSet = [
-                        { label: "周活跃量", data: dataValue, color: App.getLayoutColorCode('green') }
+                        { label: "日活跃量", data: dataValue, color: App.getLayoutColorCode('green') }
                     ];
 
                     $.plot("#chart_filled_green", DataSet, $.extend(true, {}, Plugins.getFlotDefaults(), {

@@ -19,10 +19,10 @@ public interface AppUseMapper {
     int userCount();
 
     /**
-     * 查询日活跃量
+     * 查询日活跃量或者日装机量
      * @return
      */
-    int dayActive();
+    int dayCount(int useType);
 
     /**
      * 周活跃量
@@ -35,4 +35,11 @@ public interface AppUseMapper {
      * @return
      */
     List<AppUse> devCount();
+
+    /**
+     * 累计装机量或者累计活跃量
+     * @return
+     */
+    int allCount(int useType);
+
 }

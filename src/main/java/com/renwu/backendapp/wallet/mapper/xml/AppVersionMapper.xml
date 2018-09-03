@@ -3,8 +3,8 @@
 <mapper namespace="com.renwu.backendapp.wallet.mapper.AppVersionMapper" >
     <resultMap id="BaseResultMap" type="com.renwu.backendapp.wallet.entity.AppVersion" >
         <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="create_date" property="create_date" jdbcType="DATE" />
-        <result column="update_date" property="update_date" jdbcType="DATE" />
+        <result column="create_date" property="create_date" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="update_date" jdbcType="TIMESTAMP"/>
         <result column="version" property="version" jdbcType="VARCHAR" />
         <result column="title" property="title" jdbcType="VARCHAR" />
         <result column="note" property="note" jdbcType="VARCHAR" />

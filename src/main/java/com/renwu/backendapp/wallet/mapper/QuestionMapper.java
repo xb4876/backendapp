@@ -25,4 +25,10 @@ public interface QuestionMapper {
     Question findOne(int id);
 
     List<Question> getQuestion3(@Param("entity")Question entity);
+
+    /**
+     * 累计反馈数量
+     * @return
+     */
+    int allHelpCount();
 }

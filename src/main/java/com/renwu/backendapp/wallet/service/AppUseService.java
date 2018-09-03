@@ -24,7 +24,8 @@ public class AppUseService {
      * 日活跃量
      */
     public int dayActive() {
-        return mapper.dayActive();
+        int useType = 2;//日活
+        return mapper.dayCount(useType);
     }
 
     /**
@@ -41,5 +42,32 @@ public class AppUseService {
      */
     public List<AppUse> devCount() {
         return mapper.devCount();
+    }
+
+    /**
+     * 新增装机量（当天）
+     * @return
+     */
+    public int newUseCount() {
+        int useType = 1;//装机
+        return mapper.dayCount(useType);
+    }
+
+    /**
+     * 累计装机量
+     * @return
+     */
+    public int allUseCount() {
+        int useType = 1;//装机
+        return mapper.allCount(useType);
+    }
+
+    /**
+     * 累计活跃数量
+     * @return
+     */
+    public int allActiveCount() {
+        int useType = 2;//日活
+        return mapper.allCount(useType);
     }
 }

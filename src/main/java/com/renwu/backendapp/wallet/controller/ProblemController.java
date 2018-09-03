@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 /**
- * 问题反馈controller
+ * 问题回复controller
  * @author xb4876
  */
 @Controller
@@ -29,7 +29,7 @@ public class ProblemController extends BaseController {
 
 
 	/**
-	 * 问题反馈管理列表页面
+	 * 问题回复管理列表页面
 	 *
 	 * @param model
 	 * @return
@@ -41,7 +41,7 @@ public class ProblemController extends BaseController {
 	}
 
 	/**
-	 * 获取问题反馈列表
+	 * 获取问题回复列表
 	 * @return
 	 */
 	@ResponseBody
@@ -54,7 +54,7 @@ public class ProblemController extends BaseController {
 	}
 
 	/**
-	 * 跳转问题反馈页面
+	 * 跳转问题回复页面
 	 *
 	 * @param model
 	 * @return
@@ -67,7 +67,7 @@ public class ProblemController extends BaseController {
 	}
 
 	/**
-	 * 问题反馈提交操作
+	 * 问题回复提交操作
 	 *
 	 * @param problem
 	 * @return
@@ -78,18 +78,18 @@ public class ProblemController extends BaseController {
 		int code = 0;
 		try {
 			code = service.edit(problem);
-			message.setMsg(code, "问题反馈修改成功");
+			message.setMsg(code, "问题回复修改成功");
 			model.addAttribute("message", message);
 		} catch (Exception e) {
 			LoggerUtil.error(ProblemController.class, e.toString());
-			message.setMsg(code, "问题反馈修改失败");
+			message.setMsg(code, "问题回复修改失败");
 			model.addAttribute("message", message);
 		}
 		return "redirect:/problem/problemList";
 	}
 
 	/**
-	 * 问题反馈删除操作
+	 * 问题回复删除操作
 	 * @param model
 	 * @param id
 	 * @return

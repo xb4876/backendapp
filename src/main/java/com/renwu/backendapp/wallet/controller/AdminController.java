@@ -32,11 +32,11 @@ public class AdminController {
 		model.addAttribute("dashboard", true);
 		model.addAttribute("userCount", service.userCount());//用户数量
 		model.addAttribute("dayActive", service.dayActive());//日活跃量
-		//热门文章（前三）
-		List<Question> questionList = questionService.getQuestion3(new Question());
-		for (int i = 0; i < questionList.size(); i++) {
-			model.addAttribute("top"+i, questionList.get(i).getTitle());
-		}
+
+		model.addAttribute("newUseCount", service.newUseCount());//新增装机量（当天）
+		model.addAttribute("allUseCount", service.allUseCount());//累计装机量
+		model.addAttribute("allActiveCount", service.allActiveCount());//累计活跃数量
+		model.addAttribute("allHelpCount", questionService.allHelpCount());//累计反馈数量
 		return "admin/index";
 	}
 
@@ -65,7 +65,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 周活跃量
+	 * 周日活跃量
 	 *
 	 * @return
 	 */
@@ -85,5 +85,17 @@ public class AdminController {
 	public List<AppUse> devCount() {
 		List<AppUse> list = service.devCount();
 		return list;
+	}
+
+	/**
+	 * 热门文章（前十）
+	 * @return
+	 */
+	@PostMapping("/admin/appuse/question3")
+	@ResponseBody
+	public List<Question> getQuestion3() {
+		//热门文章（前十）
+		List<Question> questionList = questionService.getQuestion3(new Question());
+		return questionList;
 	}
 }

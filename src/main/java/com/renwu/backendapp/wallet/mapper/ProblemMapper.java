@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 问题反馈管理接口
+ * 问题回复管理接口
  * @author xb4876
  */
 @Component //使用Component代替Mapper

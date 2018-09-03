@@ -8,7 +8,7 @@
 	<div id="sidebar" class="sidebar-fixed" th:fragment="sidebar">
 		<div id="sidebar-content">
 
-			<!-- Search Input -->
+			<!-- Search Input
 			<form class="sidebar-search">
 				<div class="input-box">
 					<button type="submit" class="submit">
@@ -18,7 +18,10 @@
 					</span>
 				</div>
 			</form>
-
+ 			-->
+			<div class="text-center" style="padding-top:10px;">
+				<a href="#"><img class="img-circle center-pill" style="width:108px;height:108px; margin: 10px 0 10px 0;" src="/assets/img/SW.png"/></a>
+			</div>
 			<!--=== Navigation ===-->
 			<ul id="nav">
 				<div class="sidebar-title">
@@ -40,20 +43,21 @@
 						class="icon-tags"></i> 版本管理
 				</a></li>
 				<li th:class="${problems} ? 'current' : ''"><a href="/problem/problemList"> <i
-						class="icon-mail-reply-all"></i> 问题反馈
+						class="icon-mail-reply-all"></i> 问题回复
 				</a></li>
 				<!--<li th:class="${uedit} ? 'current' : ''"><a href="/admin/uedit"> <i-->
 						<!--class="icon-text-height"></i> 富文本管理-->
 				<!--</a></li>-->
+				<!--
 				<div class="sidebar-title">
 					<span>API管理</span>
 				</div>
 				<li><a href="/swagger-ui.html" target="_blank"> <i
 						class="icon-rocket"></i> 在线API手册
 				</a></li>
-				<!-- 				<li><a href="/lightadmin" target="_blank"> <i
+							<li><a href="/lightadmin" target="_blank"> <i
 						class="icon-book"></i> 后端数据管理
-				</a></li> -->
+				</a></li>-->
 
 			</ul>
 

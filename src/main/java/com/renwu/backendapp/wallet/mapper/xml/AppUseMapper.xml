@@ -18,7 +18,7 @@
 		WHERE
 			 use_type = 1
 		GROUP BY dev_model
-		ORDER BY dev_model;
+		ORDER BY devCount DESC LIMIT 0,5;
     </select>
 
     <!-- 周活跃量 -->
@@ -39,15 +39,20 @@
        SELECT COUNT(DISTINCT dev_no) FROM sys_app_use;
     </select>
 
-    <!-- 日活跃量 -->
-    <select id="dayActive" resultType="java.lang.Integer" >
+    <!-- 日活跃量或者日装机量 -->
+    <select id="dayCount" resultType="java.lang.Integer" >
         SELECT
 	      COUNT(1)
         FROM
             sys_app_use
         WHERE
             to_days(create_date) = to_days(now())
-        AND use_type = 2;
+        AND use_type = #{useType};
+    </select>
+
+    <!-- 累计装机量或者累计活跃量 -->
+    <select id="allCount" resultType="java.lang.Integer" >
+        SELECT COUNT(id) FROM sys_app_use WHERE use_type=#{useType};
     </select>
 
 </mapper>

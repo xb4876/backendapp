@@ -56,16 +56,6 @@ public class QuestionController extends BaseController {
 	}
 
 	/**
-	 * 获取帮助中心前三
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "getQuestionTop3", method = RequestMethod.GET)
-	public List<Question> getQuestionTop3(Question question) {
-		return service.getQuestion3(question);
-	}
-
-	/**
 	 * 帮助中心问题增加表单
 	 *
 	 * @param model

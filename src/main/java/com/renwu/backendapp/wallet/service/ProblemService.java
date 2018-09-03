@@ -17,7 +17,7 @@ public class ProblemService {
     ProblemMapper mapper;
 
     /**
-     * 获取问题反馈列表
+     * 获取问题回复列表
      * pageNum 开始页数
      * pageSize 每页显示的数据条数
      * */
@@ -50,6 +50,7 @@ public class ProblemService {
      * @return
      */
     public int edit(Problem entity) {
+        entity.setFeedback_state(1);
         entity.setUpdate_date(new Date());
         int code = mapper.update(entity);
         return code;

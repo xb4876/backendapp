@@ -136,15 +136,9 @@
 
         $("#inputForm").validate({
             submitHandler: function (form) {
-                //版本号不能重复  验证
                 var version = $('#version').val();
                 $.get("/appVersion/checkVersion?version=" + version, function(data){
-                    if(data==true){
-                        form.submit();
-                    }else{
-                        //版本号已存在
-                        return top.layer.msg('版本号已存在！！！', {icon:2});
-                    }
+                    form.submit();
                 })
             },
             errorContainer: "#messageBox",

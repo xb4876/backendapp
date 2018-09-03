@@ -22,7 +22,7 @@
         SELECT id,type,title,detail,orderby,viewnum
         FROM sys_help
         ORDER BY viewnum
-        DESC LIMIT 0,3
+        DESC LIMIT 0,10
     </select>
 
     <select id="findList" resultMap="BaseResultMap">
@@ -35,6 +35,10 @@
         <if test="entity.title != null and entity.title != ''">
             AND title LIKE concat('%',#{entity.title},'%')
         </if>
+    </select>
+
+    <select id="allHelpCount" resultType="java.lang.Integer">
+        SELECT SUM(viewnum) FROM sys_help
     </select>
 
     <insert id="save">
